@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ljn.mapper.UserMapper">
+	<sql id="s">select * from users </sql>
+	<select id="query" resultType="user">
+		<include refid="s"></include>
+	</select>
+	
+	<select id="querybyid" resultType="user" parameterType="int">
+		select * from users where ID=#{ID}
+	</select>
+	
+	<delete id="remove" parameterType="int">
+		delete from users where ID=#{ID} 
+	</delete>
+	
+	<insert id="add" parameterType="user">
+       insert into users(username,password,isadmin)
+       values(#{username},#{password},#{isadmin})
+    </insert>
+    
+    <update id="update" parameterType="user">
+      update users set username=#{username},password=#{password},isadmin=#{isadmin} 
+      where ID=#{ID}
+    </update>
+</mapper>

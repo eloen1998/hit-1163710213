@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ljn.mapper.CustomerMapper">
+	<sql id="s">select * from customers </sql>
+	<select id="query" resultType="customer">
+		<include refid="s"></include>
+	</select>
+	
+	<select id="querybykind" resultType="customer" parameterType="int">
+		select * from customers where kind=#{kind}
+	</select>
+	
+	<select id="querybycid" resultType="customer" parameterType="string">
+		select * from customers where cid=#{cid}
+	</select>
+	
+	<delete id="remove" parameterType="string">
+		delete from customers where cid=#{cid} 
+	</delete>
+	
+	<insert id="add" parameterType="customer">
+       insert into customers(cid,name,phone,kind)
+       values(#{cid},#{name},#{phone},#{kind})
+    </insert>
+    
+    <update id="update" parameterType="customer">
+      update customers set cid=#{cid},name=#{name},
+      phone=#{phone},kind=#{kind} where ID=#{ID}
+    </update>
+</mapper>

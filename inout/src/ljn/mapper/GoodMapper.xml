@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ljn.mapper.GoodMapper">
+	<sql id="s">select * from goods </sql>
+	<select id="query" resultType="good">
+		<include refid="s"></include>
+	</select>
+	
+	<select id="querybygid" resultType="good" parameterType="string">
+		select * from goods where gid=#{gid}
+	</select>
+	
+	<delete id="remove" parameterType="string">
+		delete from goods where gid=#{gid} 
+	</delete>
+	
+	<insert id="add" parameterType="good">
+       insert into goods(gid,kind,NAME,inprice,outprice1,outprice2)
+       values(#{gid},#{kind},#{name},#{inprice},#{outprice1},#{outprice2})
+    </insert>
+    
+    <update id="update" parameterType="good">
+      update goods set gid=#{gid},kind=#{kind},name=#{name},
+      inprice=#{inprice},outprice1=#{outprice1},outprice2=#{outprice2} where ID=#{ID}
+    </update>
+</mapper>

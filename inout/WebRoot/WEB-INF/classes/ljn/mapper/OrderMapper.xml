@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ljn.mapper.OrderMapper">
+	<sql id="s">select * from orders </sql>
+	<select id="query" resultType="order">
+		<include refid="s"></include>
+	</select>
+	
+	<select id="querybyoid" resultType="order" parameterType="string">
+		select * from orders where oid=#{oid}
+	</select>
+	
+	<select id="queryoid" resultType="order" parameterType="string">
+		select * from orders where oid=#{oid}
+	</select>
+	
+	<delete id="remove" parameterType="string">
+		delete from orders where oid=#{oid} 
+	</delete>
+	
+	<insert id="add" parameterType="order">
+       insert into orders(oid, date, kind, gid, gname, num, cid, cname, amount, profit)
+       values(#{oid},#{date},#{kind},#{gid},#{gname},#{num},#{cid},#{cname},#{amount},#{profit})
+    </insert>
+    
+    <update id="update" parameterType="order">
+      update orders set oid=#{oid},date=#{date},kind=#{kind},gid=#{gid},gname=#{gname},
+      num=#{num},cid=#{cid},cname=#{cname},amount=#{amount},profit=#{profit} where ID=#{ID}
+    </update>
+</mapper>

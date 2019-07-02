@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ljn.mapper.HouseMapper">
+	<sql id="s">select * from house </sql>
+	<select id="query" resultType="house">
+		<include refid="s"></include>
+	</select>
+	
+	<select id="querybygid" resultType="house" parameterType="string">
+		select * from house where gid=#{gid}
+	</select>
+	
+	<delete id="remove" parameterType="string">
+		delete from house where gid=#{gid} 
+	</delete>
+	
+	<insert id="add" parameterType="house">
+       insert into house(gid,gname,num,date)
+       values(#{gid},#{gname},#{num},#{date})
+    </insert>
+    
+    <update id="update" parameterType="house">
+      update house set gid=#{gid},gname=#{gname},num=#{num},
+      date=#{date} where ID=#{ID}
+    </update>
+</mapper>
